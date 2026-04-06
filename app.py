@@ -666,20 +666,25 @@ def scanner_engine():
             print("Running scanner...")
 
             symbols = get_filtered_symbols()
+
+            # 🔥 LIMIT SYMBOLS (prevents rate limit)
+            symbols = symbols[:200]
+
             print("Symbols passed to scanner:", len(symbols))
 
             scanner_cache["top_gainers"] = build_top_gainers_extended(symbols)
             scanner_cache["most_active"] = build_most_active_extended(symbols)
-            scanner_cache["mach_setups"] = build_mach_setups(symbols)
-            scanner_cache["multi_highs"] = build_multi_timeframe_highs(symbols)
-            scanner_cache["market_feed"] = build_market_feed(symbols)
+            scanner_cache["mach_setups"] = build_mach_setups(symbols[:100])
+            scanner_cache["multi_highs"] = build_multi_timeframe_highs(symbols[:100])
+            scanner_cache["market_feed"] = build_market_feed(symbols[:200])
 
             print("Scanner updated")
 
         except Exception as e:
             print("Scanner error:", e)
 
-        time.sleep(30)
+        # 🔥 SLOW DOWN REQUESTS (CRITICAL)
+        time.sleep(180)
 
 # ----------------------------
 # Routes
