@@ -100,7 +100,7 @@ def get_tradeable_symbols():
         ):
             symbols.append(asset["symbol"])
 
-    symbols = symbols[:7000]
+    symbols = symbols[:500]
     print("Symbols used for scanning:", len(symbols))
 
     return symbols
