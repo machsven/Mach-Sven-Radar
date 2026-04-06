@@ -1,20 +1,16 @@
 from flask import Flask, jsonify, render_template
-
 import requests
 import pandas as pd
-
 from datetime import datetime, timedelta, timezone
 from zoneinfo import ZoneInfo
-
 import threading
 import time
 import os
 
-
 app = Flask(__name__)
 
-ALPACA_KEY = "PKUDXPULOHTYZOTCNLYSHYX3TS"
-ALPACA_SECRET ="JDHW8k6aVArNYEzyG9btfryf54rZaAxBwVqGMFsahwY5"
+ALPACA_KEY = os.environ.get("ALPACA_KEY")
+ALPACA_SECRET = os.environ.get("ALPACA_SECRET")
 
 HEADERS = {
     "APCA-API-KEY-ID": ALPACA_KEY or "",
@@ -724,7 +720,6 @@ def ping():
 
 
 import os
-
 if __name__ == "__main__":
     scanner_thread = threading.Thread(target=scanner_engine)
     scanner_thread.daemon = True
