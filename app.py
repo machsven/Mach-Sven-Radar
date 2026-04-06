@@ -724,7 +724,6 @@ scanner_thread = threading.Thread(target=scanner_engine)
 scanner_thread.daemon = True
 scanner_thread.start()
 
-import os
 if __name__ == "__main__":
     print("RUNNING FILE:", __file__)
     print("URL MAP:", app.url_map)
