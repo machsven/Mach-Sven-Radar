@@ -719,16 +719,16 @@ def ping():
     return "ping works"
 
 
+# Start scanner thread (works for BOTH local + Render)
+scanner_thread = threading.Thread(target=scanner_engine)
+scanner_thread.daemon = True
+scanner_thread.start()
+
 import os
 if __name__ == "__main__":
-    scanner_thread = threading.Thread(target=scanner_engine)
-    scanner_thread.daemon = True
-    scanner_thread.start()
-
     print("RUNNING FILE:", __file__)
     print("URL MAP:", app.url_map)
 
     port = int(os.environ.get("PORT", 5001))
     app.run(host="0.0.0.0", port=port, debug=False, use_reloader=False)
-
 
