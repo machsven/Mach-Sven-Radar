@@ -723,6 +723,8 @@ def ping():
     return "ping works"
 
 
+import os
+
 if __name__ == "__main__":
     scanner_thread = threading.Thread(target=scanner_engine)
     scanner_thread.daemon = True
@@ -731,6 +733,7 @@ if __name__ == "__main__":
     print("RUNNING FILE:", __file__)
     print("URL MAP:", app.url_map)
 
-    app.run(host="0.0.0.0", port=5001, debug=False, use_reloader=False)
+    port = int(os.environ.get("PORT", 5001))
+    app.run(host="0.0.0.0", port=port, debug=False, use_reloader=False)
 
 
